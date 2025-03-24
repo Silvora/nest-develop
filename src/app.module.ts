@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from './config/database.config';
-import { UsersModule } from './modules/user/user.module';
+import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { CustomerModule } from './modules/customer/customer.module';
+import { MicroModule } from './modules/micro/micro.module';
 import { ConfigModule } from '@nestjs/config';
 import {
   I18nModule,
@@ -27,8 +29,10 @@ console.log(path.join(__dirname, '/i18n'));
       resolvers: [AcceptLanguageResolver], // 根据请求头 Accept-Language 解析语言
     }),
     DatabaseModule,
-    UsersModule,
+    UserModule,
     AuthModule,
+    CustomerModule,
+    MicroModule,
   ],
   controllers: [],
   providers: [],

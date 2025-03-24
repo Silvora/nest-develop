@@ -5,7 +5,7 @@ import { User } from '../../entities/users.entity';
 import * as bcrypt from 'bcryptjs';
 
 @Injectable()
-export class UsersService {
+export class UserService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
@@ -25,9 +25,7 @@ export class UsersService {
 
   async findOne(id: number): Promise<User> {
     const res = await this.usersRepository.findOne({ where: { id } });
-    return {
-      ...res,
-    } as User;
+    return res as User;
   }
 
   async update(id: number, user: User): Promise<void> {
