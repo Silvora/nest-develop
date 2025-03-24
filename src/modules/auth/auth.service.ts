@@ -1,18 +1,18 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { UsersService } from '@/modules/user/user.service';
+import { UserService } from '@/modules/user/user.service';
 import * as bcrypt from 'bcryptjs';
 import { User } from '@/entities/users.entity';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private usersService: UsersService,
+    private userService: UserService,
     private jwtService: JwtService,
   ) {}
 
   async validateUser(username: string, pass: string): Promise<User> {
-    const user = await this.usersService.findOneByUsername(username);
+    const user = await this.userService.findOneByUsername(username);
     if (!user) {
       throw new UnauthorizedException('用户不存在');
     }
