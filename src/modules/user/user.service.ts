@@ -8,38 +8,38 @@ import * as bcrypt from 'bcryptjs';
 export class UserService {
   constructor(
     @InjectRepository(User)
-    private usersRepository: Repository<User>,
+    private userRepository: Repository<User>,
   ) {}
 
   async create(user: User): Promise<User> {
     user.password = await bcrypt.hash(user.password, 10);
-    const res = await this.usersRepository.save(user);
+    const res = await this.userRepository.save(user);
     return {
       ...res,
     } as User;
   }
 
   async findAll(): Promise<User[]> {
-    return this.usersRepository.find();
+    return this.userRepository.find();
   }
 
   async findOne(id: number): Promise<User> {
-    const res = await this.usersRepository.findOne({ where: { id } });
+    const res = await this.userRepository.findOne({ where: { id } });
     return {
       ...res,
     } as User;
   }
 
   async update(id: number, user: User): Promise<void> {
-    await this.usersRepository.update(id, user);
+    await this.userRepository.update(id, user);
   }
 
   async remove(id: number): Promise<void> {
-    await this.usersRepository.delete(id);
+    await this.userRepository.delete(id);
   }
 
   async findOneByUsername(username: string): Promise<User> {
-    return this.usersRepository.findOne({
+    return this.userRepository.findOne({
       where: { username },
     }) as Promise<User>;
   }
